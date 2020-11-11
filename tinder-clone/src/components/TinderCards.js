@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./TinderCards.css";
 import TinderCard from "react-tinder-card";
 import axios from "../axios";
+import { ThemeContext } from "./ThemeContext";
 
 function TinderCards() {
+  const { isLightTheme, light, dark } = useContext(ThemeContext);
+  const theme = isLightTheme ? light : dark;
   const [people, setpeople] = useState([]);
 
   useEffect(() => {
@@ -16,7 +19,6 @@ function TinderCards() {
   }, []);
 
   //dir is direction of swipe
-
   const swiped = (direction, name) => {
     console.log(`Swiped ${name} in ${direction} direction`);
   };
@@ -42,6 +44,7 @@ function TinderCards() {
               <div
                 style={{
                   backgroundImage: `url(${person.imgUrl})`,
+                  boxShadow: theme.box_shadow,
                 }}
                 className="tinderCards_card"
               >
